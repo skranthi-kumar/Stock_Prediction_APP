@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Stock Prediction App</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <style media="screen">
+        *,
+        *:before,
+        *:after {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #080710;
+        }
+        .background {
+            width: 430px;
+            height: 520px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 50%;
+        }
+        .background .shape {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            border-radius: 50%;
+        }
+        .shape:first-child {
+            background: linear-gradient(#1845ad, #23a2f6);
+            left: -80px;
+            top: -80px;
+        }
+        .shape:last-child {
+            background: linear-gradient(to right, #ff512f, #f09819);
+            right: -30px;
+            bottom: -80px;
+        }
+        form {
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.13);
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            padding: 50px 35px;
+            text-align: center;
+        }
+        form * {
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            outline: none;
+            border: none;
+        }
+        form h3 {
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 42px;
+            margin-bottom: 30px;
+        }
+        label {
+            display: block;
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        input {
+            display: block;
+            height: 50px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+        ::placeholder {
+            color: #e5e5e5;
+        }
+        button {
+            margin-top: 50px;
+            width: 100%;
+            background-color: #ffffff;
+            color: #080710;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .graph {
+            margin: 20px auto;
+            width: 90%;
+            height: 300px;
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 10px;
+            position: relative;
+            text-align: center;
+        }
+        .graph h4 {
+            color: #ffffff;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <form id="predictionForm" onsubmit="return validateForm()" method="POST">
+        <h3>Make a Prediction</h3>
+
+        <label for="input1">Input 1</label>
+        <input type="text" name="input1" placeholder="Enter value for input 1" id="input1" required>
+
+        <label for="input2">Input 2</label>
+        <input type="text" name="input2" placeholder="Enter value for input 2" id="input2" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    <div class="graph">
+        <h4>Prediction Results</h4>
+        <canvas id="predictionChart" width="400" height="200"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function validateForm() {
+            const input1 = document.getElementById('input1').value;
+            const input2 = document.getElementById('input2').value;
+
+            if (input1.trim() === '' || input2.trim() === '') {
+                alert('Please fill in all fields.');
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
+        }
+
+        const ctx = document.getElementById('predictionChart').getContext('2d');
+        const predictionChart = new Chart(ctx, {
+            type: 'line', // Change to your desired chart type
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May'], // Sample labels
+                datasets: [{
+                    label: 'Predictions',
+                    data: [12, 19, 3, 5, 2], // Sample data
+                    borderColor: 'rgba(255, 255, 255, 0.8)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

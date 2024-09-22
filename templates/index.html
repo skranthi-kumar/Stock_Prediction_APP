@@ -1,0 +1,13 @@
+<h1>Stock Prediction Dashboard</h1>
+<form action="/predict" method="post">
+    <label for="stock">Select Stock:</label>
+    <select name="stock" id="stock">
+        {% for stock in stocks %}
+            <option value="{{ stock }}">{{ stock }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Predict</button>
+</form>
+{% if stock_image %}
+    <img src="{{ url_for('static', filename=stock_image) }}" alt="Stock Plot">
+{% endif %}
