@@ -1,6 +1,6 @@
-pip install pandas
-pip install flask
-pip install matplotlib 
-pip install flask-login
-pip install jinja2 
-pip install seaborn
+pandas
+flask
+matplotlib 
+flask-login
+jinja2 
+seaborn
