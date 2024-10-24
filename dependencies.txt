@@ -1,0 +1,10 @@
+Flask
+Flask-WTF
+pandas
+numpy
+scikit-learn
+tensorflow
+joblib
+hdfs
+pyspark
+matplotlib
