@@ -1,6 +1,0 @@
-pandas
-flask
-matplotlib 
-flask-login
-jinja2 
-seaborn
